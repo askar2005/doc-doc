@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String      @id @default(cuid())
+  name      String
+  email     String      @unique
+  password  String
+  age       Int?
+  gender    String?
+  weight    Float?
+  skinGoals String?
+  hairGoals String?
+  tasks     DailyTask[]
+  chats     AIChat[]
+  stats     UserStats?
+  tips      HealthTip[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model DailyTask {
+  id                String   @id @default(cuid())
+  userId            String
+  dayKey            String
+  waterCompleted      Boolean  @default(false)
+  eggCompleted        Boolean  @default(false)
+  fruitsCompleted     Boolean  @default(false)
+  vegetablesCompleted Boolean  @default(false)
+  sundalCompleted     Boolean  @default(false)
+  proteinCompleted    Boolean  @default(false)
+  keeraiCompleted     Boolean  @default(false)
+  waterCompletedAt    DateTime?
+  eggCompletedAt      DateTime?
+  fruitsCompletedAt   DateTime?
+  vegetablesCompletedAt DateTime?
+  sundalCompletedAt   DateTime?
+  proteinCompletedAt  DateTime?
+  keeraiCompletedAt   DateTime?
+  score               Int      @default(0)
+  xp                  Int      @default(0)
+  consistency         Float    @default(0)
+  streakMultiplier    Float    @default(1)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, dayKey])
+}
+
+model AIChat {
+  id        String   @id @default(cuid())
+  userId    String
+  message   String
+  response  String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model HealthTip {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  category    String
+  userId      String?
+  createdAt   DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model UserStats {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  streak              Int      @default(0)
+  longestStreak       Int      @default(0)
+  totalXP             Int      @default(0)
+  totalCompletedTasks Int      @default(0)
+  averageScore        Float    @default(0)
+  level               String   @default("Bronze")
+  updatedAt           DateTime @updatedAt
+  createdAt           DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
