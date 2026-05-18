@@ -13,13 +13,13 @@ export default function ToastViewport() {
   const removeToast = useUiStore((state) => state.removeToast);
 
   return (
-    <div className="pointer-events-none fixed right-4 top-4 z-[80] flex w-[calc(100%-2rem)] max-w-sm flex-col gap-3">
+    <div className="pointer-events-none fixed left-3 right-3 top-3 z-[80] flex max-w-full flex-col gap-3 sm:left-auto sm:right-4 sm:top-4 sm:w-[calc(100%-2rem)] sm:max-w-sm">
       {toasts.map((toast) => (
-        <div key={toast.id} className={`pointer-events-auto rounded-3xl border p-4 shadow-neon backdrop-blur-xl ${toneClasses[toast.type]}`}>
+        <div key={toast.id} className={`pointer-events-auto rounded-3xl border p-3 shadow-neon backdrop-blur-xl sm:p-4 ${toneClasses[toast.type]}`}>
           <div className="flex items-start justify-between gap-4">
             <div>
-              <div className="font-semibold">{toast.title}</div>
-              {toast.message ? <div className="mt-1 text-sm opacity-90">{toast.message}</div> : null}
+              <div className="text-sm font-semibold sm:text-base">{toast.title}</div>
+              {toast.message ? <div className="mt-1 text-xs leading-5 opacity-90 sm:text-sm">{toast.message}</div> : null}
             </div>
             <button type="button" onClick={() => removeToast(toast.id)} className="rounded-full p-1 hover:bg-white/10">
               <X size={16} />

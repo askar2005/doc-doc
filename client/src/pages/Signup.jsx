@@ -41,10 +41,10 @@ export default function Signup() {
   };
 
   const inputClass =
-    'w-full rounded-2xl border border-white/10 bg-[#0B0F1A]/60 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/50';
+    'min-h-12 w-full rounded-2xl border border-white/10 bg-[#0B0F1A]/60 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/50 sm:text-base';
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-md items-center px-4">
+    <div className="mx-auto flex min-h-dvh w-full max-w-md items-center px-4 py-6 sm:py-8">
       <AuthForm
         title="Create your account"
         subtitle="Set your goals and start tracking skin and hair routines."
@@ -59,7 +59,7 @@ export default function Signup() {
             <input className={inputClass} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Name" />
             <input className={inputClass} type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Email" />
             <input className={inputClass} type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="Password" />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <input className={inputClass} value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })} placeholder="Age" />
               <input className={inputClass} value={form.gender} onChange={(e) => setForm({ ...form, gender: e.target.value })} placeholder="Gender" />
             </div>

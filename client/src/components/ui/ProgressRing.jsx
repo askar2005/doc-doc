@@ -1,4 +1,4 @@
-export default function ProgressRing({ value = 0, size = 150, stroke = 12, label }) {
+export default function ProgressRing({ value = 0, size = 136, stroke = 12, label }) {
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (value / 100) * circumference;
@@ -27,10 +27,9 @@ export default function ProgressRing({ value = 0, size = 150, stroke = 12, label
         </defs>
       </svg>
       <div className="absolute text-center">
-        <div className="text-3xl font-bold text-white">{value}%</div>
-        <div className="text-xs uppercase tracking-[0.3em] text-slate-400">{label}</div>
+        <div className="text-2xl font-bold text-white sm:text-3xl">{value}%</div>
+        <div className="text-[10px] uppercase tracking-[0.26em] text-slate-400 sm:text-xs">{label}</div>
       </div>
     </div>
   );
 }
-

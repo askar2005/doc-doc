@@ -24,19 +24,19 @@ export default function Tasks() {
   };
 
   return (
-    <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+    <div className="grid gap-3 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
       <GlassCard>
-        <h2 className="text-xl font-semibold text-white">Daily Tasks</h2>
-        <p className="mt-2 text-sm text-slate-400">Tap each task to track consistency and XP.</p>
-        <div className="mt-5">
+        <h2 className="text-lg font-semibold text-white sm:text-xl">Daily Tasks</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-400">Tap each task to track consistency and XP.</p>
+        <div className="mt-4 sm:mt-5">
           <TaskChecklist tasks={shortTask} onToggle={toggleTask} />
         </div>
       </GlassCard>
 
       <GlassCard>
-        <h3 className="text-lg font-semibold text-white">Reminder Settings</h3>
-        <p className="mt-2 text-sm text-slate-400">Browser reminders are stored locally and can be expanded into push notifications later.</p>
-        <div className="mt-5 space-y-3">
+        <h3 className="text-base font-semibold text-white sm:text-lg">Reminder Settings</h3>
+        <p className="mt-2 text-sm leading-6 text-slate-400">Browser reminders are stored locally and can be expanded into push notifications later.</p>
+        <div className="mt-4 space-y-3 sm:mt-5">
           {[
             ['waterReminder', 'Water reminder'],
             ['fruitReminder', 'Fruit reminder'],
@@ -47,9 +47,9 @@ export default function Tasks() {
               key={key}
               type="button"
               onClick={() => setReminderSettings({ [key]: !reminderSettings[key] })}
-              className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-left transition hover:bg-white/10"
+              className="flex w-full items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-left transition hover:bg-white/10"
             >
-              <span className="text-sm text-white">{label}</span>
+              <span className="min-w-0 text-sm text-white sm:text-base">{label}</span>
               <span className={`rounded-full px-3 py-1 text-xs ${reminderSettings[key] ? 'bg-emerald-400/20 text-emerald-200' : 'bg-white/5 text-slate-400'}`}>
                 {reminderSettings[key] ? 'On' : 'Off'}
               </span>
@@ -59,7 +59,7 @@ export default function Tasks() {
         <button
           type="button"
           onClick={requestNotificationPermission}
-          className="mt-5 w-full rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-50 transition hover:bg-cyan-400/15"
+          className="mt-4 w-full rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-50 transition hover:bg-cyan-400/15 sm:mt-5"
         >
           Enable browser notifications
         </button>

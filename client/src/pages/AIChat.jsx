@@ -123,20 +123,20 @@ export default function AIChat() {
   };
 
   return (
-    <div className="grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
-      <GlassCard className="flex min-h-[70vh] flex-col">
-        <h2 className="text-xl font-semibold text-white">AI Health Assistant</h2>
-        <p className="mt-2 text-sm text-slate-400">
+    <div className="grid gap-3 xl:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
+      <GlassCard className="flex min-h-[60vh] flex-col">
+        <h2 className="text-lg font-semibold text-white sm:text-xl">AI Health Assistant</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-400">
           Friendly wellness coach mode. No diagnosis, no medicine advice, only practical support.
         </p>
 
-        <div className="mt-5 flex-1 space-y-3 overflow-y-auto pr-1">
+        <div className="mt-4 max-h-[55vh] flex-1 space-y-3 overflow-y-auto pr-1 sm:mt-5 sm:max-h-[60vh] sm:space-y-4 lg:max-h-[62vh]">
           {loading && !conversation.length ? (
-            <Skeleton className="h-36 w-full skeleton-shimmer" />
+            <Skeleton className="h-32 w-full skeleton-shimmer sm:h-36" />
           ) : null}
 
           {!loading && !conversation.length ? (
-            <div className="max-w-[85%] rounded-3xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100">
+            <div className="max-w-[88%] rounded-3xl border border-white/10 bg-white/5 px-4 py-3 text-sm leading-6 text-slate-100 sm:max-w-[78%]">
               Hi, I am your wellness coach. Ask me how to improve skin glow, hair growth, hydration, or what to eat next.
             </div>
           ) : null}
@@ -148,7 +148,7 @@ export default function AIChat() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.18 }}
               className={[
-                'max-w-[92%] rounded-3xl px-4 py-3 text-sm leading-6 sm:max-w-[78%]',
+                'max-w-[88%] rounded-3xl px-4 py-3 text-sm leading-6 sm:max-w-[78%] sm:text-[15px]',
                 message.role === 'user'
                   ? 'ml-auto bg-gradient-to-r from-primary to-secondary text-white shadow-neon'
                   : 'border border-white/10 bg-white/5 text-slate-100 backdrop-blur-xl'
@@ -162,22 +162,22 @@ export default function AIChat() {
           <div ref={bottomRef} />
         </div>
 
-        <form onSubmit={send} className="mt-5 flex gap-3">
+        <form onSubmit={send} className="mt-4 flex flex-col gap-3 border-t border-white/10 pt-4 pb-[env(safe-area-inset-bottom)] sm:flex-row sm:items-center">
           <input
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="Ask about skin, hair, food, or routine"
-            className="flex-1 rounded-2xl border border-white/10 bg-[#0B0F1A]/60 px-4 py-3 text-white outline-none placeholder:text-slate-500 focus:border-cyan-300/50"
+            className="min-w-0 flex-1 rounded-2xl border border-white/10 bg-[#0B0F1A]/60 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-cyan-300/50 sm:text-base"
           />
-          <PrimaryButton type="submit" disabled={sending}>
+          <PrimaryButton type="submit" disabled={sending} className="w-full sm:w-auto">
             <SendHorizonal size={16} />
           </PrimaryButton>
         </form>
       </GlassCard>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <GlassCard>
-          <h3 className="text-lg font-semibold text-white">Context snapshot</h3>
+          <h3 className="text-base font-semibold text-white sm:text-lg">Context snapshot</h3>
           <div className="mt-4 space-y-3 text-sm text-slate-300">
             <StatLine label="Goal" value={user?.hairGoals || user?.skinGoals || 'Wellness'} />
             <StatLine label="Weekly streak" value={`${streakSummary?.streak || 0} days`} />
@@ -187,14 +187,14 @@ export default function AIChat() {
         </GlassCard>
 
         <GlassCard>
-          <h3 className="text-lg font-semibold text-white">Example prompts</h3>
+          <h3 className="text-base font-semibold text-white sm:text-lg">Example prompts</h3>
           <div className="mt-4 space-y-3 text-sm text-slate-300">
             {['How to improve hair growth?', 'Why is my skin dull?', 'Best foods for glowing skin?', 'What should I eat tomorrow?'].map((example) => (
               <button
                 key={example}
                 type="button"
                 onClick={() => setQuestion(example)}
-                className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-left transition hover:border-cyan-300/40 hover:bg-white/10"
+                className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-left text-sm leading-6 transition hover:border-cyan-300/40 hover:bg-white/10"
               >
                 {example}
               </button>
@@ -208,9 +208,9 @@ export default function AIChat() {
 
 function StatLine({ label, value }) {
   return (
-    <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+    <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
       <span className="text-slate-400">{label}</span>
-      <span className="text-white">{value}</span>
+      <span className="min-w-0 break-words text-right text-white">{value}</span>
     </div>
   );
 }

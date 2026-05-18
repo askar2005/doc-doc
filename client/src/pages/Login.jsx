@@ -28,7 +28,7 @@ export default function Login() {
   };
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-md items-center px-4">
+    <div className="mx-auto flex min-h-dvh w-full max-w-md items-center px-4 py-6 sm:py-8">
       <AuthForm
         title="Welcome back"
         subtitle="Log in to continue your glow and growth streak."
@@ -45,14 +45,14 @@ export default function Login() {
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               type="email"
               placeholder="Email"
-              className="w-full rounded-2xl border border-white/10 bg-[#0B0F1A]/60 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/50"
+              className="min-h-12 w-full rounded-2xl border border-white/10 bg-[#0B0F1A]/60 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/50 sm:text-base"
             />
             <input
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               type="password"
               placeholder="Password"
-              className="w-full rounded-2xl border border-white/10 bg-[#0B0F1A]/60 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/50"
+              className="min-h-12 w-full rounded-2xl border border-white/10 bg-[#0B0F1A]/60 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/50 sm:text-base"
             />
             <div className="text-center text-sm text-slate-500">
               <Link className="text-cyan-300" to="/signup">

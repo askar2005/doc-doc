@@ -8,9 +8,9 @@ export default function Profile() {
   const reminderSettings = useAppStore((state) => state.reminderSettings);
 
   return (
-    <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+    <div className="grid gap-3 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
       <GlassCard>
-        <h2 className="text-xl font-semibold text-white">Profile</h2>
+        <h2 className="text-lg font-semibold text-white sm:text-xl">Profile</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <Info label="Name" value={user?.name || '-'} />
           <Info label="Email" value={user?.email || '-'} />
@@ -22,7 +22,7 @@ export default function Profile() {
       </GlassCard>
 
       <GlassCard>
-        <h3 className="text-lg font-semibold text-white">User Stats</h3>
+        <h3 className="text-base font-semibold text-white sm:text-lg">User Stats</h3>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <Info label="Level" value={stats?.level || 'Bronze'} />
           <Info label="Streak" value={`${stats?.streak || 0} days`} />
@@ -32,8 +32,8 @@ export default function Profile() {
           <Info label="Average score" value={Math.round(stats?.averageScore || 0)} />
         </div>
 
-        <h3 className="mt-6 text-lg font-semibold text-white">Reminder Snapshot</h3>
-        <div className="mt-4 space-y-2 text-sm text-slate-300">
+        <h3 className="mt-6 text-base font-semibold text-white sm:text-lg">Reminder Snapshot</h3>
+        <div className="mt-4 space-y-2 text-sm leading-6 text-slate-300">
           {Object.entries({
             waterReminder: 'Water reminder',
             fruitReminder: 'Fruit reminder',
@@ -58,7 +58,7 @@ function Info({ label, value }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
       <div className="text-xs uppercase tracking-[0.25em] text-slate-500">{label}</div>
-      <div className="mt-1 text-white">{value}</div>
+      <div className="mt-1 break-words text-sm text-white sm:text-base">{value}</div>
     </div>
   );
 }

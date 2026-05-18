@@ -20,15 +20,15 @@ export default function Dashboard() {
   const xp = todayTask?.xp || 0;
 
   return (
-    <div className="space-y-5">
-      <div className="grid gap-4 lg:grid-cols-[1.4fr_0.8fr]">
+    <div className="space-y-4 sm:space-y-5">
+      <div className="grid gap-3 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)]">
         <GlassCard className="relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.16),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(139,92,246,0.18),transparent_35%)]" />
-          <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p className="text-sm text-cyan-300/90">Hello, {user?.name || 'Glow seeker'}</p>
-              <h2 className="mt-2 text-3xl font-bold text-white">Your skin and hair routine looks strong today.</h2>
-              <p className="mt-3 max-w-2xl text-slate-300">
+          <div className="relative flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="min-w-0">
+              <p className="text-xs text-cyan-300/90 sm:text-sm">Hello, {user?.name || 'Glow seeker'}</p>
+              <h2 className="mt-2 text-2xl font-bold leading-tight text-white sm:text-3xl">Your skin and hair routine looks strong today.</h2>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
                 Stay consistent with hydration, protein, fruits, and greens. The AI coach will keep your plan personal and practical.
               </p>
             </div>
@@ -38,33 +38,33 @@ export default function Dashboard() {
           </div>
         </GlassCard>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
           <StatCard title="Daily score" value={`${score}/100`} hint="Dynamic health score from today's habits." />
           <StatCard title="Daily streak" value={`${streak} days`} hint="Consistency compounds, keep the streak alive." accent="from-cyan-400 to-primary" />
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         <StatCard title="Water intake" value={shortTask.water ? '3L' : '0L'} hint="Target: 3L for the day." accent="from-accent to-cyan-400" />
         <StatCard title="XP earned" value={xp} hint={`${progress}% of the checklist is complete.`} />
         <StatCard title="Completion" value={`${progress}%`} hint="Animated daily habit progress." accent="from-green-400 to-cyan-400" />
         <StatCard title="Health status" value={scoreLabel(score)} hint="Friendly wellness status, not a diagnosis." accent="from-fuchsia-500 to-cyan-400" />
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
+      <div className="grid gap-3 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
         <GlassCard>
           <div className="mb-4 flex items-center gap-2 text-white">
             <HeartPulse size={18} className="text-pink-300" />
-            <h3 className="text-lg font-semibold">Daily task checklist</h3>
+            <h3 className="text-base font-semibold text-white sm:text-lg">Daily task checklist</h3>
           </div>
-          {loading ? <Skeleton className="h-80 w-full skeleton-shimmer" /> : <TaskChecklist tasks={shortTask} onToggle={toggleTask} />}
+          {loading ? <Skeleton className="h-72 w-full skeleton-shimmer sm:h-80" /> : <TaskChecklist tasks={shortTask} onToggle={toggleTask} />}
         </GlassCard>
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <GlassCard>
             <div className="mb-3 flex items-center gap-2 text-white">
               <Droplets size={18} className="text-cyan-300" />
-              <h3 className="text-lg font-semibold">Health tips</h3>
+              <h3 className="text-base font-semibold text-white sm:text-lg">Health tips</h3>
             </div>
             {healthTip ? <HealthTip text={`${healthTip.title}: ${healthTip.description}`} /> : <Skeleton className="h-24 w-full skeleton-shimmer" />}
           </GlassCard>
@@ -72,9 +72,9 @@ export default function Dashboard() {
           <GlassCard>
             <div className="mb-3 flex items-center gap-2 text-white">
               <Sparkles size={18} className="text-purple-300" />
-              <h3 className="text-lg font-semibold">AI suggestions</h3>
+              <h3 className="text-base font-semibold text-white sm:text-lg">AI suggestions</h3>
             </div>
-            <p className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
+            <p className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-6 text-slate-300">
               {streak >= 7 ? 'Your streak is building momentum. Keep the food and hydration pattern steady to protect it.' : 'Small actions today create a stronger glow and growth routine tomorrow.'}
             </p>
           </GlassCard>
