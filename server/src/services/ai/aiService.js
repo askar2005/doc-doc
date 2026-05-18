@@ -1,4 +1,4 @@
-import { generateWithOllama } from './ollamaProvider.js';
+import { runAIProvider } from './providerResolver.js';
 import { buildPrompt } from './promptBuilder.js';
 
 export async function generateAIResponse({ user, todayTask, weeklySummary, monthlySummary, streakSummary, question, recentPatterns, recentConversation, context }) {
@@ -15,7 +15,7 @@ export async function generateAIResponse({ user, todayTask, weeklySummary, month
   });
 
   try {
-    const response = await generateWithOllama(prompt);
+    const response = await runAIProvider(prompt);
     if (response) return normalizeResponse(response);
   } catch (error) {
     // Fall through to a safe canned response.
